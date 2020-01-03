@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Teches on 我的博客</title>
-    <link>http://gmono.github.io/tech/</link>
+    <link>https://gmono.github.io/tech/</link>
     <description>Recent content in Teches on 我的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <lastBuildDate>Fri, 03 Jan 2020 23:57:21 +0800</lastBuildDate>
     
-	<atom:link href="http://gmono.github.io/tech/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://gmono.github.io/tech/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>React Component的基本逻辑</title>
-      <link>http://gmono.github.io/tech/frontend/react-component%E7%9A%84%E5%9F%BA%E6%9C%AC%E9%80%BB%E8%BE%91/</link>
+      <link>https://gmono.github.io/tech/frontend/react-component%E7%9A%84%E5%9F%BA%E6%9C%AC%E9%80%BB%E8%BE%91/</link>
       <pubDate>Fri, 03 Jan 2020 23:57:21 +0800</pubDate>
       
-      <guid>http://gmono.github.io/tech/frontend/react-component%E7%9A%84%E5%9F%BA%E6%9C%AC%E9%80%BB%E8%BE%91/</guid>
+      <guid>https://gmono.github.io/tech/frontend/react-component%E7%9A%84%E5%9F%BA%E6%9C%AC%E9%80%BB%E8%BE%91/</guid>
       <description>createClass先不说，在ES6中或Typescript中通过如下方式得到Component
 //三个类型参数分别为 props state store类型class Control extends React.Component&amp;lt;{prop:string},{text:string},{}&amp;gt;{render(){return &amp;lt;div&amp;gt;hello world {this.state.text}&amp;lt;/div&amp;gt; }}其中有一些生命周期函数比如 componentDidMount之类,不过，这种书写组件的方式（包括那种createClass）的方式让人感觉就好像必须继承这个Component类才能作为一个React组件一样，那些来源不明的生命周期调用让人有种神秘感
 但我们明明可以通过这样的方式定义组件
@@ -37,10 +37,10 @@ React Component基类有一个forceUpdate方法，先不论其是如何起作用
     
     <item>
       <title>Winform与React等技术的区别</title>
-      <link>http://gmono.github.io/tech/frontend/winform%E4%B8%8Ereact%E7%AD%89%E6%8A%80%E6%9C%AF%E7%9A%84%E5%8C%BA%E5%88%AB/</link>
+      <link>https://gmono.github.io/tech/frontend/winform%E4%B8%8Ereact%E7%AD%89%E6%8A%80%E6%9C%AF%E7%9A%84%E5%8C%BA%E5%88%AB/</link>
       <pubDate>Fri, 03 Jan 2020 23:57:21 +0800</pubDate>
       
-      <guid>http://gmono.github.io/tech/frontend/winform%E4%B8%8Ereact%E7%AD%89%E6%8A%80%E6%9C%AF%E7%9A%84%E5%8C%BA%E5%88%AB/</guid>
+      <guid>https://gmono.github.io/tech/frontend/winform%E4%B8%8Ereact%E7%AD%89%E6%8A%80%E6%9C%AF%E7%9A%84%E5%8C%BA%E5%88%AB/</guid>
       <description>虽然React和Winform都是建立App UI程序的工具库，也其实都是基于Control树建立的UI，而React不过是通过类html的方式方便的表示了初始的UI布局，与Winform的堆砌代码（vs生成）并没有本质区别，但当要写小工具程序时我会本能地在winform和qt之间选择，而非这些Web框架，即使是Blazor这种东西也感觉不好用，更别说什么Electron，直觉上，似乎React等UI体系和Winform还是有一定区别的
  基本比较 共性：
  Winform通过代码构建控件树，React其实也是，jsx只是语法糖 Winform可以拿到控件的引用，并直接修改其属性值，修改会立即呈现在UI上，React也可以拿到Component的引用，通过setProps修改属性，并重绘UI，同时可以通过forceUpdate在任何时候重绘UI Winform可以添加事件监听器，React也可以在render函数中指定事件监听 Winform通过一般窗口的事件系统，即从父到子的事件传递，React也通过document上的事件监听器监听事件，并进行分发  差异：
