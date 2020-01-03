@@ -1,0 +1,25 @@
+.highlight>pre{
+
+    background: #f7f7f7 !important;
+    /* color:  !important; */
+    font-weight: bold;
+    font-size: 0.95em;
+}
+.highlight>pre>code{
+    background: #1a1a1a !important;
+}
+p{
+    color:#585858;
+}
+strong{
+    font-weight: bolder;
+    color:black !important;
+}
+
+ol{
+    color:#fd6b6b;
+    padding:2em;
+    padding-right: 0;
+    border: gray 1px;
+    border-style: dashed;
+}
