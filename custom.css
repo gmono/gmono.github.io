@@ -1,25 +1,49 @@
-.highlight>pre{
+.highlight>pre {
 
     background: #f7f7f7 !important;
     /* color:  !important; */
     font-weight: bold;
     font-size: 0.95em;
 }
-.highlight>pre>code{
+
+.highlight>pre>code {
     background: #1a1a1a !important;
 }
-p{
-    color:#585858;
+
+p {
+    color: #444444;
+
 }
-strong{
+blockquote p{
+    color: rgb(79, 77, 165);
+}
+strong {
     font-weight: bolder;
-    color:black !important;
+    color: black !important;
 }
 
-ol{
-    color:#fd6b6b;
-    padding:2em;
+#main ol ,#main ul{
+    color: #464646;
+    padding: 2em;
     padding-right: 0;
-    border: gray 1px;
-    border-style: dashed;
+    background: #fbf5f1b7;
+}
+
+#main{
+    background: url("/images/动漫 - 54.jpg");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    /* /* position: relative; */
+    padding:2em;
+}
+#main>div{
+    background: #ffffffc9;
+    padding:2em;
+}
+
+#header{
+    background-position: center !important;
+    background-attachment:scroll;
 }

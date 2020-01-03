@@ -17,25 +17,25 @@ Free for personal and commercial use under the CCA 3.0 license (html5up.net/lice
 		
 		<meta name="og:site_name" content="我的博客">
 		<meta name="og:title" content="Teches">
-		<meta name="og:url" content="http://example.org/tech/">
+		<meta name="og:url" content="http://gmono.github.io/tech/">
 		
-		<meta name="og:image" content="http://example.org/images/355.jpg">
+		<meta name="og:image" content="http://gmono.github.io/images/355.jpg">
 		
 		
 
 		<meta name="generator" content="Hugo 0.62.0" />
 
-		<!--[if lte IE 8]><script src='http://example.org/js/ie/html5shiv.js'></script><![endif]-->
+		<!--[if lte IE 8]><script src='http://gmono.github.io/js/ie/html5shiv.js'></script><![endif]-->
 		<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-		<link rel="stylesheet" href="http://example.org/css/main.css" />
-		<!--[if lte IE 8]><link rel="stylesheet" href="http://example.org//css/ie8.css"><![endif]-->
+		<link rel="stylesheet" href="http://gmono.github.io/css/main.css" />
+		<!--[if lte IE 8]><link rel="stylesheet" href="http://gmono.github.io//css/ie8.css"><![endif]-->
 
 		
-		<link href="http://example.org/tech/index.xml" rel="alternate" type="application/rss+xml" title="我的博客" />
-		<link href="http://example.org/tech/index.xml" rel="feed" type="application/rss+xml" title="我的博客" />
+		<link href="http://gmono.github.io/tech/index.xml" rel="alternate" type="application/rss+xml" title="我的博客" />
+		<link href="http://gmono.github.io/tech/index.xml" rel="feed" type="application/rss+xml" title="我的博客" />
 		
 		
-		<link rel="stylesheet" href="http://example.org/custom.css">
+		<link rel="stylesheet" href="http://gmono.github.io/custom.css">
 		
 	</head>
 
@@ -43,7 +43,7 @@ Free for personal and commercial use under the CCA 3.0 license (html5up.net/lice
 		<!-- Header -->
 <header id="header">
 	
-	<a href="http://example.org/" class="image avatar"><img src="http://example.org/images/355.jpg" alt="" /></a>
+	<a href="http://gmono.github.io/" class="image avatar"><img src="http://gmono.github.io/images/355.jpg" alt="" /></a>
 	
 	
 		<h1><strong>上清X的博客</strong></h1>
@@ -53,13 +53,13 @@ Free for personal and commercial use under the CCA 3.0 license (html5up.net/lice
 		<nav id="sidebar">
 			<ul>
 			
-				<li><a href="http://example.org/">主页</a></li>
+				<li><a href="http://gmono.github.io/">主页</a></li>
 			
-				<li><a href="http://example.org/tech/">技术</a></li>
+				<li><a href="http://gmono.github.io/tech/">技术</a></li>
 			
-				<li><a href="http://example.org/life/">生活</a></li>
+				<li><a href="http://gmono.github.io/life/">生活</a></li>
 			
-				<li><a href="http://example.org/about/">关于本博客</a></li>
+				<li><a href="http://gmono.github.io/about/">关于本博客</a></li>
 			
 			</ul>
 		</nav>
@@ -69,49 +69,85 @@ Free for personal and commercial use under the CCA 3.0 license (html5up.net/lice
 
 		<!-- Main -->
 		<div id="main">
-			
+			<div>
+					
     
 
     
     
         <span>
     <h1>
-        <a href="http://example.org/tech/frontend/react-component%E7%9A%84%E5%9F%BA%E6%9C%AC%E9%80%BB%E8%BE%91/">React Component的基本逻辑</a>
+        <a href="http://gmono.github.io/tech/frontend/react-component%E7%9A%84%E5%9F%BA%E6%9C%AC%E9%80%BB%E8%BE%91/">React Component的基本逻辑</a>
     </h1>
 
     <i class="fa fa-calendar"></i>&nbsp;&nbsp;
-<time datetime="2020-01-01 19:03:37 &#43;0800 CST">1019-01-01</time>&nbsp;&nbsp;
+<time datetime="2020-01-03 23:57:21 &#43;0800 CST">3019-01-03</time>&nbsp;&nbsp;
 
 
 
 
-    
-    
-        <i class="fa fa-folder"></i>&nbsp;&nbsp;
-        
-        <a class="article-category-link" href="http://example.org/categories/%e5%89%8d%e7%ab%af%e6%8a%80%e6%9c%af">前端技术</a>
-        
-        
-    
 
-
-
-   
-   
-       &nbsp;&nbsp;<i class="fa fa-tags"></i>&nbsp;&nbsp;
-       
-       <a class="article-category-link" href="http://example.org/tags/%e5%88%86%e6%9e%90%e7%a0%94%e7%a9%b6">分析研究</a>
-       &middot;
-       
-       <a class="article-category-link" href="http://example.org/tags/%e6%9e%b6%e6%9e%84%e6%8b%86%e8%a7%a3">架构拆解</a>
-       
-       
-   
 
 
 </span>
 
-<p>React Component的基本逻辑 createClass先不说，在ES6中或Typescript中通过如下方式得到Component //三个类型</p>
+<p>createClass先不说，在ES6中或Typescript中通过如下方式得到Component
+//三个类型参数分别为 props state store类型class Control extends React.Component&lt;{prop:string},{text:string},{}&gt;{render(){return &lt;div&gt;hello world {this.state.text}&lt;/div&gt; }}其中有一些生命周期函数比如 componentDidMount之类,不过，这种书写组件的方式（包括那种createClass）的方式让人感觉就好像必须继承这个Component类才能作为一个React组件一样，那些来源不明的生命周期调用让人有种神秘感
+但我们明明可以通过这样的方式定义组件
+//定义组件const MyControl=()=&gt;&lt;div&gt;hello world&lt;/div&gt; //定义实例const ele=&lt;div&gt;test object&lt;/div&gt; 其中上面的MyControl类似一个纯粹的render函数，与render函数不同的是，其无法使用props和state，但如果在函数中传入props和state对象，功能上和普通组件也没有什么区别，只不过声明周期函数没有了
+而下面的方式则更直接，直接创建了一个实例，这个实例就可以直接像这样调用
+let e=&lt;div&gt;{ele}&lt;/div&gt; 可以看到，上面这种方式显得简单的多，并没有什么神秘的Component类存在，同时，{}中的内容并非一定要是什么state和props中的内容 与Component不同的是，这样写的element，并不会随着state和props的更改而更改，或者说，即使在其中引用的某个对象的某个值，在这个值变化的似乎，节点的内容也不会改变，因为其在创建的时候就已经把值读取过来了，创建了一个实例 而对于上面的MyControl的创建方式来说，如果其引用的是我们传递给它的某个对象的值例如
+//定义组件const MyControl=(values)=&gt;&lt;div&gt;hello world{values.value}&lt;/div&gt; 那么只要当values变化时再调用一次这个函数，就可以得到一个更新之后的UI
+这样似乎功能上与普通的组件并没有本质区别 如果我们可以有一个方法监控values的值变化，并在变化时重新调用这个MyControl函数得到一个新的组件实例，并渲染，那效果和普通的 Component是一样的，还可以在其中绑定事件，事件函数同样修改values，并主动或者由监视器重调用得到组件实例，其效果就更没差别了
+当前的所谓无状态组件就是用的这种方法
+ 实际上，还有另一种考虑，就是不通过组件自身的状态变化触发重渲染
+React Component基类有一个forceUpdate方法，先不论其是如何起作用的，但可以确定的是，通过这个方法，我们其实可以不依赖 setState来触发变化，而是可以随时修改state然后强制更新
+重要的是通过这种手段，可以让组件外部直接修改组件并更新UI
+考虑一下在Winform中的Control的概念，一个Control是可以被外部调用函数，修改属性，其修改属性后可以直接在UI上体现出来，如果调用函数，则这个函数内部多是在设置其他Control的属性，或者在自己绘制UI，通过System.Drawing组件
+我们在写一个窗口时，可以在任何位置修改任何组件的任何属性，不限方法不限属性，但修改属性时，子Control中的setter会得到消息并对UI进行重绘，而在React中似乎要通过一套专门的方法来修改属性和Control的状态，且还不能自绘 其要通过各种binding来把属性绑定到变量上，然后修改变量进而修改属性，这样就转了一个弯感觉不那么自由
+在调用Control的函数方面，虽然也是可以通过ref拿到Control的实例，并调用其类方法，和winform中并无不同，但调用了类方法后，方法内部依然是用改变状态的方式来更新UI 要把React的流程变成Winform的流程，主要有两个点
+ 用forceUpdate和setter代替原生的属性和state传递链 添加组件的自绘能力 添加可以在外部添加监听器（类似+=）的事件系统  这些内容，即Winform与React的差异，以及为什么包括xaml在内的类xml和mvvm方式编写UI的途径，其创造的软件复杂度总比不过传统Winform，将在下一部分讨论 《比较类xml-binding UI系统与Winform》 和 《在React中构建标准Winform Control体系》</p>
+<hr>
+
+    
+        <span>
+    <h1>
+        <a href="http://gmono.github.io/tech/frontend/winform%E4%B8%8Ereact%E7%AD%89%E6%8A%80%E6%9C%AF%E7%9A%84%E5%8C%BA%E5%88%AB/">Winform与React等技术的区别</a>
+    </h1>
+
+    <i class="fa fa-calendar"></i>&nbsp;&nbsp;
+<time datetime="2020-01-03 23:57:21 &#43;0800 CST">3019-01-03</time>&nbsp;&nbsp;
+
+
+
+
+
+
+
+</span>
+
+<p>虽然React和Winform都是建立App UI程序的工具库，也其实都是基于Control树建立的UI，而React不过是通过类html的方式方便的表示了初始的UI布局，与Winform的堆砌代码（vs生成）并没有本质区别，但当要写小工具程序时我会本能地在winform和qt之间选择，而非这些Web框架，即使是Blazor这种东西也感觉不好用，更别说什么Electron，直觉上，似乎React等UI体系和Winform还是有一定区别的
+ 基本比较 共性：
+ Winform通过代码构建控件树，React其实也是，jsx只是语法糖 Winform可以拿到控件的引用，并直接修改其属性值，修改会立即呈现在UI上，React也可以拿到Component的引用，通过setProps修改属性，并重绘UI，同时可以通过forceUpdate在任何时候重绘UI Winform可以添加事件监听器，React也可以在render函数中指定事件监听 Winform通过一般窗口的事件系统，即从父到子的事件传递，React也通过document上的事件监听器监听事件，并进行分发  差异：
+ Winform可以动态的增删事件监听 React假设子组件的Props只依赖父组件的state，因此其存在一个传递链，很少有外部修改了某个组件的props然后重绘的情况，一般把父组件与子组件的关系写在render函数里，事件函数一般只修改自己的state React的公共状态通过store处理，其扮演了一个公共的第三方触发器，其可以发事件让一系列组件的state修改并重绘 总体来说，React的数据修改传递是严格限制的，各种修改方式都有特定体系和书写方式，比如Redux和React中传统的父子组件传递链，其修改属性，状态等有严格的规范和流程，并不像Winform中一样只要程序在跑就能做任何事情，React中使用Redux相当于使用一个新的机制，需要新的书写模式和设计，Winform中只需要制造一个带事件和属性的类，在某个Container中把这个当作store传递下去，其内建事件监听和属性监听，子组件自己选择如何处理这个store，不需要修改程序结构，没有特殊书写方式，没有特殊生命周期和流程 Winform中的组件都是自绘的，其Control基类相当于一个画板，而React中是有一系列不可分元素的，其他元素都是这些不可分元素的组合 Winform中可以加入HTML，React中不能加入Winform，这意味着，React并没有Winform底层和高兼容，Control=画板意味着其可以允许一切存在，而React则被动的多 React中默认使用绑定模式，Winform可以直接修改容器组件的Controls属性，而React是将其绑定到一个list上，这样比较被动，但好处是不会出现“忘记更新”的情况 Winform程序可以直接启动，不需要环境支撑，有原始的程序生命周期（从Main函数启动）React即使是Native也没有正常的程序生命周期，而使用Electrn则需要专门针对其特殊处理 Winform是以窗口为单位，调用show就可以显示窗口，React在浏览器里是等于一切都在一个窗口里存在，而使用Electron则使用Electron的那套窗口系统，其比普通桌面窗口程序的逻辑要复杂的多，远不是“创建类-调用Show-读取属性那么简单，其甚至涉及到多进程通信，给程序编写带来了额外成本 Winform不跨平台但通过Mono跨平台，Qt可以跨平台  综合分析 除了React外，一系列WebUI框架正在渗透到桌面领域，但其书写逻辑在浏览器里与桌面程序不同，生命周期也不同，通过一些如Nativescript和Electorn的框架，其可以写桌面程序，但这些框架都有自己的一套体系，可以说与一般的桌面程序并不一致，这些体系形成了额外的复杂性，并增加了一系列前置工作，甚至其Hellworld的文件数和代码量就远超普通桌面程序
+另一方面，现在的新型UI库多是专为UI而生，而非为实现程序功能而生，可以说，在实现功能上，唯有双向绑定算是进步，其余的无非都是方便设计UI，这些新型UI技术，比如Qt的QML，XAML体系（WPF Avalonia 等） HTML Hybrid体系（React Vue等）
+理论上，Winform中也可以用双向绑定，或者通过监听数据变更而修改UI，但不同的是，新型UI多把数据和UI的关系写在UI的定义中，这样可以提供非常灵活的定义UI的方式，比如在UI中可以写一个Map把一个列表映射为一个UI，在构建UI上，这种方式确实有优势，但在逻辑上需要转弯，增加了麻烦程度，让行动变得不那么直接，从写桌面程序时那种什么都是自己做变成了什么都是自动做或声明做，感觉没那么顺畅和可控了，虽然有诸多好处，但仍让人感觉稍显“重量级”
+当前很多只强调功能的大型软件，都是通过传统桌面UI写出来的，而介于HtmlUI和传统之间的XAML UI（其Element是一个正在的控件，底层依然是自绘，只是定义UI的方式变成了标记语言），也有过大型软件，而HTMLUI似乎并没有过达到桌面软件复杂度的大型项目
+ HtmlUI中的Element并不像其他技术中那样是继承于同一“空白画板”的通用组件，而是一个DOM里的节点，其很多方面和Control的概念并不兼容，比如不能自绘，没有一套统一的基础的Control属性（实际上其是HtmlElement为基础类）
+但可以这么看，把CSS看作自绘的方式，但真正要绘制，多需要很多元素组合才能形成一个效果，这就破坏了单一性和完整性，在HTMLUI中似乎重要担心能不能实现一个效果，如何实现一个效果，就像是通过积木来搭房子，而在传统UI中不需要考虑这些，其一定是可以实现效果的，就好像用泥巴来捏一个房子一样
+本来，html中有Canvas，可以自绘，但Canvas并没有专门为Control准备，其用起来根本感觉不出是个Control基类，且Canvas并不符合React等体系的模式
+一般一个窗口控件是在Draw函数（或者类似的同类回调函数）中绘制自身，而其对应的React中的则是render函数，于是其创建并返回控件树（通过“原子节点”）就与自绘的意义一样了，这样就把普通窗口组件中的“Content-Draw”两层内容变成了一层，也就是只能有子组件，不能有绘图
+虽然React中有生命周期回调，比如DidMount和DidUpdate回调，但其逻辑意义并不是要绘图，只是表明实际UI节点已经挂载完毕或者更新完毕且可以对实际的组件实例进行操作，并不是说要绘图，虽然我们绘图一般是在这两个函数里进行绘制
+ 插入：React的回调执行时应该获取实际组件节点的实例引用，而在Winform中，控件树无时无刻不是就绪的，其只要一开始拿到控件的实例就好，不需要重复获取
+ 这种架构其实是把渲染和产生子组件树混同，可以把render函数就看作一个动态的子组件树，那么这种体系里其实是只有子组件树而没有自绘的 之所以会有这种情况，也即“唯子组件论”，是由于大家已经习惯了“html即画布，css即绘图”的模式，其子组件与绘制的概念模糊了，实现效果和包含下级组件都是通过包含的html内容来实现的，这总混合可能是由于html+css的表达能力太强的原因
+而普通窗口技术比如winform则从一开始就是由空白的Control建立起来的，其基础就是自绘大部分效果都是自绘得来的，其子组件树并没有实现效果的意义，而是单纯用来指定包含关系位置关系和逻辑关系（html中的父子节点甚至没有严格的ui上的包含关系，即其子组件完全可以越过父组件甚至成为一个浮动节点）
+HTML体系的这种混合其实带来了逻辑上的不清晰，当然也有好处，比如统一方便，比如可以通过同样的方式生成一个控件列表且每个控件都有加成效果（这些效果不需要子组件自己实现，也不需要任何特定的容器实现），比如可以通过数据驱动的方式结构化地产生效果，配合SVG这种能力就变得更强
+但逻辑上，这并不是绘图的逻辑，而仍然是产生UI的逻辑，其默认了UI即绘图，把绘图也变成了声明式，这样有时候是有好处的，但由于绘图本身的复杂性，以及其逻辑结构顺序并不同于UI，很多事情又变得复杂
+同时UI逻辑结构也受了影响，本来一个简单的控件树，在实现一大堆效果后就变得复杂，到处充满了修修补补的代码，其UI父子关系并不是UI逻辑包含关系的直接体现，而是充斥着一堆要实现各种效果的奇技淫巧
+这种不清晰直接剧烈地增加了复杂度并阻止其在功能上轻易变得复杂（UI上倒确实做的很炫）
+ 如何解决 React如何拥有Winform等窗口库的优点？
+ 首先，就是要构建多Window的体系，让其Window可以简单地Show一下就能显示，不需要各种奇技淫巧和trick型逻辑 其次，就是增加自绘能力，把效果的绘制强制从UI的产生中分离出来，这样虽然在实现效果时会感觉有些不方便不顺手，但却实际地保证了清晰，比如在UI中给item加效果就应该弄一个独立的容器组件实现，这也有利于统一HTML APP的风格，以防大批app充满廉价感，还有利于增加性能 建立类似桌面系统的那种体系，除了多窗口外还有比如通知，message视图（桌面右上角的通知），获取其他窗口和控件的HDC（对应于其绘图画板）允许程序在各处绘制图形 把HTML纳入“绘图”的体系中，也即绘图除了Canvas外上面应该还叠一层div并再叠加一层canvas做前景，这样构建一个“绘图面”，就不会损失html和css的能力，在逻辑上也是一个完整的绘图器 构建Control基类，其提供一个绘图面，上面一层Content，再上面还有一个前景面，Control提供一个默认的控件绘图体系，与Bitmap绘图体系兼容一致 进一步地，可以让所有Control都只由Canvas为基础，或者直接建立在一个Canvas中，但这样成本太高，也可以退一步，在书写时禁止在render里添加效果代码而只能添加逻辑代码，一切效果都只能由容器实现，一个实现效果的组件就只能实现效果，不能把效果和逻辑混合起来   后记： 还有一个大问题是HTML和CSS高度依赖，HTML节点元素并不独立，简单地说，比如子元素设置height 100%无效，竟然是因为css要从父元素的css读取height属性，即使父元素高度不为0，只要没有显式设置，都认为=为0
+如此看来，HTML节点从来就没有被当作一个真正的UI节点对待过，而完全是一个文档元素，其在UI上的实际属性都是不算数的，可以说其渲染出来的结果和这节点本身根本没有关系，而JS程序去读的时候才能从浏览器那里读到真正高度，CSS只会在CSS里找，这说明其文档 UI CSS ，基本是分离的，这是很奇怪的结构，也是很复杂的结构，这种结构让UI和文档和CSS脱节，就好像HTML并个UI一样，html和css甚至无法与渲染出来的UI有任何实际交互，虽然HTML一开始也不是为APP构建的</p>
 <hr>
 
     
@@ -119,6 +155,8 @@ Free for personal and commercial use under the CCA 3.0 license (html5up.net/lice
     
 
 
+			</div>
+			
 		</div>
 
 		<!-- Footer -->
@@ -135,10 +173,10 @@ Free for personal and commercial use under the CCA 3.0 license (html5up.net/lice
 		
 		
 		
-		<li><a href="http://example.org/#contact-form" class="icon fa-envelope-o"><span class="label">Email</span></a></li>
+		<li><a href="http://gmono.github.io/#contact-form" class="icon fa-envelope-o"><span class="label">Email</span></a></li>
 		
 		
-		<li><a href="http://example.org/tech/index.xml" class="icon fa-rss" type="application/rss+xml"><span class="label">RSS</span></a></li>
+		<li><a href="http://gmono.github.io/tech/index.xml" class="icon fa-rss" type="application/rss+xml"><span class="label">RSS</span></a></li>
 		
 	</ul>
 
@@ -152,12 +190,12 @@ Free for personal and commercial use under the CCA 3.0 license (html5up.net/lice
 </footer>
 
 <!-- Scripts -->
-<script src="http://example.org/js/jquery.min.js"></script>
-<script src="http://example.org/js/jquery.poptrox.min.js"></script>
-<script src="http://example.org/js/skel.min.js"></script>
-<script src="http://example.org/js/util.js"></script>
+<script src="http://gmono.github.io/js/jquery.min.js"></script>
+<script src="http://gmono.github.io/js/jquery.poptrox.min.js"></script>
+<script src="http://gmono.github.io/js/skel.min.js"></script>
+<script src="http://gmono.github.io/js/util.js"></script>
 
-<script src="http://example.org/js/main.js"></script>
+<script src="http://gmono.github.io/js/main.js"></script>
 
 
 

@@ -17,22 +17,22 @@ Free for personal and commercial use under the CCA 3.0 license (html5up.net/lice
 		
 		<meta name="og:site_name" content="我的博客">
 		<meta name="og:title" content="React Component的基本逻辑">
-		<meta name="og:url" content="http://example.org/tech/frontend/react-component%E7%9A%84%E5%9F%BA%E6%9C%AC%E9%80%BB%E8%BE%91/">
+		<meta name="og:url" content="http://gmono.github.io/tech/frontend/react-component%E7%9A%84%E5%9F%BA%E6%9C%AC%E9%80%BB%E8%BE%91/">
 		
-		<meta name="og:image" content="http://example.org/images/355.jpg">
+		<meta name="og:image" content="http://gmono.github.io/images/355.jpg">
 		
 		
 
 		<meta name="generator" content="Hugo 0.62.0" />
 
-		<!--[if lte IE 8]><script src='http://example.org/js/ie/html5shiv.js'></script><![endif]-->
+		<!--[if lte IE 8]><script src='http://gmono.github.io/js/ie/html5shiv.js'></script><![endif]-->
 		<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-		<link rel="stylesheet" href="http://example.org/css/main.css" />
-		<!--[if lte IE 8]><link rel="stylesheet" href="http://example.org//css/ie8.css"><![endif]-->
+		<link rel="stylesheet" href="http://gmono.github.io/css/main.css" />
+		<!--[if lte IE 8]><link rel="stylesheet" href="http://gmono.github.io//css/ie8.css"><![endif]-->
 
 		
 		
-		<link rel="stylesheet" href="http://example.org/custom.css">
+		<link rel="stylesheet" href="http://gmono.github.io/custom.css">
 		
 	</head>
 
@@ -40,7 +40,7 @@ Free for personal and commercial use under the CCA 3.0 license (html5up.net/lice
 		<!-- Header -->
 <header id="header">
 	
-	<a href="http://example.org/" class="image avatar"><img src="http://example.org/images/355.jpg" alt="" /></a>
+	<a href="http://gmono.github.io/" class="image avatar"><img src="http://gmono.github.io/images/355.jpg" alt="" /></a>
 	
 	
 		<h1><strong>上清X的博客</strong></h1>
@@ -50,13 +50,13 @@ Free for personal and commercial use under the CCA 3.0 license (html5up.net/lice
 		<nav id="sidebar">
 			<ul>
 			
-				<li><a href="http://example.org/">主页</a></li>
+				<li><a href="http://gmono.github.io/">主页</a></li>
 			
-				<li><a href="http://example.org/tech/">技术</a></li>
+				<li><a href="http://gmono.github.io/tech/">技术</a></li>
 			
-				<li><a href="http://example.org/life/">生活</a></li>
+				<li><a href="http://gmono.github.io/life/">生活</a></li>
 			
-				<li><a href="http://example.org/about/">关于本博客</a></li>
+				<li><a href="http://gmono.github.io/about/">关于本博客</a></li>
 			
 			</ul>
 		</nav>
@@ -66,85 +66,63 @@ Free for personal and commercial use under the CCA 3.0 license (html5up.net/lice
 
 		<!-- Main -->
 		<div id="main">
-			
+			<div>
+					
 	<span>
 		<h1>React Component的基本逻辑</h1>
 
 		<i class="fa fa-calendar"></i>&nbsp;&nbsp;
-<time datetime="2020-01-01 19:03:37 &#43;0800 CST">1019-01-01</time>&nbsp;&nbsp;
+<time datetime="2020-01-03 23:57:21 &#43;0800 CST">3019-01-03</time>&nbsp;&nbsp;
 
 
 
 
-    
-    
-        <i class="fa fa-folder"></i>&nbsp;&nbsp;
-        
-        <a class="article-category-link" href="http://example.org/categories/%e5%89%8d%e7%ab%af%e6%8a%80%e6%9c%af">前端技术</a>
-        
-        
-    
 
-
-
-   
-   
-       &nbsp;&nbsp;<i class="fa fa-tags"></i>&nbsp;&nbsp;
-       
-       <a class="article-category-link" href="http://example.org/tags/%e5%88%86%e6%9e%90%e7%a0%94%e7%a9%b6">分析研究</a>
-       &middot;
-       
-       <a class="article-category-link" href="http://example.org/tags/%e6%9e%b6%e6%9e%84%e6%8b%86%e8%a7%a3">架构拆解</a>
-       
-       
-   
 
 
 	</span>
 
 	<p>
-	    <h1 id="react-component">React Component的基本逻辑</h1>
-<p>createClass先不说，在ES6中或Typescript中通过如下方式得到Component</p>
+	    <p>createClass先不说，在ES6中或Typescript中通过如下方式得到Component</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-tsx" data-lang="tsx"><span style="color:#75715e">//三个类型参数分别为 props state store类型
 </span><span style="color:#75715e"></span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Control</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">React</span>.<span style="color:#a6e22e">Component</span><span style="color:#f92672">&lt;</span>{<span style="color:#a6e22e">prop</span>:<span style="color:#66d9ef">string</span>},{<span style="color:#a6e22e">text</span>:<span style="color:#66d9ef">string</span>},{}<span style="color:#f92672">&gt;</span>
 {
     <span style="color:#a6e22e">render</span>(){
-        <span style="color:#66d9ef">return</span> <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">div</span><span style="color:#f92672">&gt;</span><span style="color:#a6e22e">hello</span> <span style="color:#a6e22e">world</span> {<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">state</span>.<span style="color:#a6e22e">text</span>}<span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/</span><span style="color:#960050;background-color:#1e0010">d</span><span style="color:#960050;background-color:#1e0010">i</span><span style="color:#960050;background-color:#1e0010">v</span><span style="color:#960050;background-color:#1e0010">&gt;</span>
+        <span style="color:#66d9ef">return</span> <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">div</span><span style="color:#f92672">&gt;</span><span style="color:#a6e22e">hello</span> <span style="color:#a6e22e">world</span> {<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">state</span>.<span style="color:#a6e22e">text</span>}<span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/</span><span style="color:#960050;background-color:#1e0010">d</span><span style="color:#960050;background-color:#1e0010">i</span><span style="color:#960050;background-color:#1e0010">v</span><span style="color:#960050;background-color:#1e0010">&gt;</span><span style="color:#960050;background-color:#1e0010"></span>
     }
 }
-</code></pre></div><p>其中有一些生命周期函数比如componentDidMount之类,不过，这种书写组件的方式（包括那种createClass）的方式让人感觉就好像必须继承这个Component类才能作为一个React组件一样，那些来源不明的生命周期调用让人有种神秘感<br>
-<strong>但我们明明可以通过这样的方式定义组件</strong></p>
+</code></pre></div><p>其中有一些生命周期函数比如  componentDidMount之类,不过，这种书写组件的方式（包括那种createClass）的方式让人感觉就好像必须继承这个Component类才能作为一个React组件一样，那些来源不明的生命周期调用让人有种神秘感<br>
+但我们明明可以通过这样的方式定义组件</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-tsx" data-lang="tsx"><span style="color:#75715e">//定义组件
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">MyControl</span><span style="color:#f92672">=</span>()<span style="color:#f92672">=</span><span style="color:#f92672">&gt;</span><span style="color:#f92672">&lt;</span><span style="color:#a6e22e">div</span><span style="color:#f92672">&gt;</span><span style="color:#a6e22e">hello</span> <span style="color:#a6e22e">world</span><span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/</span><span style="color:#960050;background-color:#1e0010">d</span><span style="color:#960050;background-color:#1e0010">i</span><span style="color:#960050;background-color:#1e0010">v</span><span style="color:#960050;background-color:#1e0010">&gt;</span>
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">MyControl</span><span style="color:#f92672">=</span>()<span style="color:#f92672">=</span><span style="color:#f92672">&gt;</span><span style="color:#f92672">&lt;</span><span style="color:#a6e22e">div</span><span style="color:#f92672">&gt;</span><span style="color:#a6e22e">hello</span> <span style="color:#a6e22e">world</span><span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/</span><span style="color:#960050;background-color:#1e0010">d</span><span style="color:#960050;background-color:#1e0010">i</span><span style="color:#960050;background-color:#1e0010">v</span><span style="color:#960050;background-color:#1e0010">&gt;</span><span style="color:#960050;background-color:#1e0010"></span>
 <span style="color:#75715e">//定义实例
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">ele</span><span style="color:#f92672">=</span><span style="color:#f92672">&lt;</span><span style="color:#a6e22e">div</span><span style="color:#f92672">&gt;</span><span style="color:#a6e22e">test</span> <span style="color:#a6e22e">object</span><span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/</span><span style="color:#960050;background-color:#1e0010">d</span><span style="color:#960050;background-color:#1e0010">i</span><span style="color:#960050;background-color:#1e0010">v</span><span style="color:#960050;background-color:#1e0010">&gt;</span>
-</code></pre></div><p>其中上面的MyControl类似一个纯粹的render函数，与render函数不同的是，其无法使用props和state，但如果在函数中传入props和state对象，<strong>功能上和普通组件也没有什么区别，只不过声明周期函数没有了</strong><br>
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">ele</span><span style="color:#f92672">=</span><span style="color:#f92672">&lt;</span><span style="color:#a6e22e">div</span><span style="color:#f92672">&gt;</span><span style="color:#a6e22e">test</span> <span style="color:#a6e22e">object</span><span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/</span><span style="color:#960050;background-color:#1e0010">d</span><span style="color:#960050;background-color:#1e0010">i</span><span style="color:#960050;background-color:#1e0010">v</span><span style="color:#960050;background-color:#1e0010">&gt;</span><span style="color:#960050;background-color:#1e0010"></span>
+</code></pre></div><p>其中上面的MyControl类似一个纯粹的render函数，与render函数不同的是，其无法使用props和state，但如果在函数中传入props和state对象，功能上和普通组件也没有什么区别，只不过声明周期函数没有了<br>
 而下面的方式则更直接，直接创建了一个实例，这个实例就可以直接像这样调用</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-tsx" data-lang="tsx"><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">e</span><span style="color:#f92672">=</span><span style="color:#f92672">&lt;</span><span style="color:#a6e22e">div</span><span style="color:#f92672">&gt;</span>{<span style="color:#a6e22e">ele</span>}<span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/</span><span style="color:#960050;background-color:#1e0010">d</span><span style="color:#960050;background-color:#1e0010">i</span><span style="color:#960050;background-color:#1e0010">v</span><span style="color:#960050;background-color:#1e0010">&gt;</span>
-</code></pre></div><p>可以看到，上面这种方式显得简单的多，并没有什么神秘的Component类存在，同时，{}中的内容并非一定要是什么state和props中的内容<br>
-与Component不同的是，这样写的element，并不会随着state和props的更改而更改，或者说，即使在其中引用的某个对象的某个值，在这个值变化的似乎，节点的内容也不会改变，因为其在创建的时候就已经把值读取过来了，创建了一个实例<br>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-tsx" data-lang="tsx"><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">e</span><span style="color:#f92672">=</span><span style="color:#f92672">&lt;</span><span style="color:#a6e22e">div</span><span style="color:#f92672">&gt;</span>{<span style="color:#a6e22e">ele</span>}<span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/</span><span style="color:#960050;background-color:#1e0010">d</span><span style="color:#960050;background-color:#1e0010">i</span><span style="color:#960050;background-color:#1e0010">v</span><span style="color:#960050;background-color:#1e0010">&gt;</span><span style="color:#960050;background-color:#1e0010"></span>
+</code></pre></div><p>可以看到，上面这种方式显得简单的多，并没有什么神秘的Component类存在，同时，{}中的内容并非一定要是什么state和props中的内容
+与Component不同的是，这样写的element，并不会随着state和props的更改而更改，或者说，即使在其中引用的某个对象的某个值，在这个值变化的似乎，节点的内容也不会改变，因为其在创建的时候就已经把值读取过来了，创建了一个实例
 而对于上面的MyControl的创建方式来说，如果其引用的是我们传递给它的某个对象的值例如</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-tsx" data-lang="tsx"><span style="color:#75715e">//定义组件
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">MyControl</span><span style="color:#f92672">=</span>(<span style="color:#a6e22e">values</span>)<span style="color:#f92672">=</span><span style="color:#f92672">&gt;</span><span style="color:#f92672">&lt;</span><span style="color:#a6e22e">div</span><span style="color:#f92672">&gt;</span><span style="color:#a6e22e">hello</span> <span style="color:#a6e22e">world</span>{<span style="color:#a6e22e">values</span>.<span style="color:#a6e22e">value</span>}<span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/</span><span style="color:#960050;background-color:#1e0010">d</span><span style="color:#960050;background-color:#1e0010">i</span><span style="color:#960050;background-color:#1e0010">v</span><span style="color:#960050;background-color:#1e0010">&gt;</span>
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">MyControl</span><span style="color:#f92672">=</span>(<span style="color:#a6e22e">values</span>)<span style="color:#f92672">=</span><span style="color:#f92672">&gt;</span><span style="color:#f92672">&lt;</span><span style="color:#a6e22e">div</span><span style="color:#f92672">&gt;</span><span style="color:#a6e22e">hello</span> <span style="color:#a6e22e">world</span>{<span style="color:#a6e22e">values</span>.<span style="color:#a6e22e">value</span>}<span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/</span><span style="color:#960050;background-color:#1e0010">d</span><span style="color:#960050;background-color:#1e0010">i</span><span style="color:#960050;background-color:#1e0010">v</span><span style="color:#960050;background-color:#1e0010">&gt;</span><span style="color:#960050;background-color:#1e0010"></span>
 </code></pre></div><p>那么只要当values变化时再调用一次这个函数，就可以得到一个更新之后的UI<br>
-这样似乎功能上与普通的组件并没有本质区别<br>
-如果我们可以有一个方法监控values的值变化，并在变化时重新调用这个MyControl函数得到一个新的组件实例，并渲染，那效果和普通的Component是一样的，还可以在其中绑定事件，事件函数同样修改values，并主动或者由监视器重调用得到组件实例，其效果就更没差别了<br>
-当前的所谓<strong>无状态组件</strong>就是用的这种方法</p>
+这样似乎功能上与普通的组件并没有本质区别
+如果我们可以有一个方法监控values的值变化，并在变化时重新调用这个MyControl函数得到一个新的组件实例，并渲染，那效果和普通的   Component是一样的，还可以在其中绑定事件，事件函数同样修改values，并主动或者由监视器重调用得到组件实例，其效果就更没差别了<br>
+当前的所谓无状态组件就是用的这种方法</p>
 <hr>
 <p>实际上，还有另一种考虑，就是不通过组件自身的状态变化触发重渲染<br>
-React Component基类有一个forceUpdate方法，先不论其是如何起作用的，但可以确定的是，通过这个方法，我们其实可以不依赖setState来触发变化，而是可以随时修改state然后强制更新<br>
-重要的是<strong>通过这种手段，可以让组件外部直接修改组件并更新UI</strong><br>
+React Component基类有一个forceUpdate方法，先不论其是如何起作用的，但可以确定的是，通过这个方法，我们其实可以不依赖  setState来触发变化，而是可以随时修改state然后强制更新<br>
+重要的是通过这种手段，可以让组件外部直接修改组件并更新UI<br>
 考虑一下在Winform中的Control的概念，一个Control是可以被外部调用函数，修改属性，其修改属性后可以直接在UI上体现出来，如果调用函数，则这个函数内部多是在设置其他Control的属性，或者在自己绘制UI，通过System.Drawing组件<br>
-我们在写一个窗口时，可以在任何位置修改任何组件的任何属性，不限方法不限属性，但修改属性时，子Control中的setter会得到消息并对UI进行重绘，而在React中似乎要通过一套专门的方法来修改属性和Control的状态，且还不能自绘<br>
+我们在写一个窗口时，可以在任何位置修改任何组件的任何属性，不限方法不限属性，但修改属性时，子Control中的setter会得到消息并对UI进行重绘，而在React中似乎要通过一套专门的方法来修改属性和Control的状态，且还不能自绘
 其要通过各种binding来把属性绑定到变量上，然后修改变量进而修改属性，这样就转了一个弯感觉不那么自由<br>
-在调用Control的函数方面，虽然也是可以通过ref拿到Control的实例，并调用其类方法，和winform中并无不同，但调用了类方法后，方法内部依然是用改变状态的方式来更新UI<br>
+在调用Control的函数方面，虽然也是可以通过ref拿到Control的实例，并调用其类方法，和winform中并无不同，但调用了类方法后，方法内部依然是用改变状态的方式来更新UI
 要把React的流程变成Winform的流程，主要有两个点</p>
 <ol>
 <li>用forceUpdate和setter代替原生的属性和state传递链</li>
 <li>添加组件的自绘能力</li>
 <li>添加可以在外部添加监听器（类似+=）的事件系统</li>
 </ol>
-<hr>
 <p>这些内容，即Winform与React的差异，以及为什么包括xaml在内的类xml和mvvm方式编写UI的途径，其创造的软件复杂度总比不过传统Winform，将在下一部分讨论 <strong>《比较类xml-binding UI系统与Winform》</strong> 和 <strong>《在React中构建标准Winform Control体系》</strong></p>
 
 	</p>
@@ -170,6 +148,8 @@ React Component基类有一个forceUpdate方法，先不论其是如何起作用
 <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 <a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
 
+			</div>
+			
 		</div>
 
 		<!-- Footer -->
@@ -186,10 +166,10 @@ React Component基类有一个forceUpdate方法，先不论其是如何起作用
 		
 		
 		
-		<li><a href="http://example.org/#contact-form" class="icon fa-envelope-o"><span class="label">Email</span></a></li>
+		<li><a href="http://gmono.github.io/#contact-form" class="icon fa-envelope-o"><span class="label">Email</span></a></li>
 		
 		
-		<li><a href="http://example.org/index.xml" class="icon fa-rss" type="application/rss+xml"><span class="label">RSS</span></a></li>
+		<li><a href="http://gmono.github.io/index.xml" class="icon fa-rss" type="application/rss+xml"><span class="label">RSS</span></a></li>
 		
 	</ul>
 
@@ -203,12 +183,12 @@ React Component基类有一个forceUpdate方法，先不论其是如何起作用
 </footer>
 
 <!-- Scripts -->
-<script src="http://example.org/js/jquery.min.js"></script>
-<script src="http://example.org/js/jquery.poptrox.min.js"></script>
-<script src="http://example.org/js/skel.min.js"></script>
-<script src="http://example.org/js/util.js"></script>
+<script src="http://gmono.github.io/js/jquery.min.js"></script>
+<script src="http://gmono.github.io/js/jquery.poptrox.min.js"></script>
+<script src="http://gmono.github.io/js/skel.min.js"></script>
+<script src="http://gmono.github.io/js/util.js"></script>
 
-<script src="http://example.org/js/main.js"></script>
+<script src="http://gmono.github.io/js/main.js"></script>
 
 
 
