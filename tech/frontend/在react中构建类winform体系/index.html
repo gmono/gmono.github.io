@@ -1,0 +1,286 @@
+<!DOCTYPE HTML>
+
+<!-- 
+Strata by HTML5 UP
+html5up.net | @n33co
+Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>在React中构建类Winform体系 &middot; 我的博客</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="author" content="上清">
+		<meta name="description" content="测试一下">
+		<meta http-equiv="content-language" content="zh-cn" />
+
+		
+		<meta name="og:site_name" content="我的博客">
+		<meta name="og:title" content="在React中构建类Winform体系">
+		<meta name="og:url" content="https://gmono.github.io/tech/frontend/%E5%9C%A8react%E4%B8%AD%E6%9E%84%E5%BB%BA%E7%B1%BBwinform%E4%BD%93%E7%B3%BB/">
+		
+		<meta name="og:image" content="https://gmono.github.io/images/355.jpg">
+		
+		
+
+		<meta name="generator" content="Hugo 0.62.0" />
+
+		<!--[if lte IE 8]><script src='https://gmono.github.io/js/ie/html5shiv.js'></script><![endif]-->
+		<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		<link rel="stylesheet" href="https://gmono.github.io/css/main.css" />
+		<!--[if lte IE 8]><link rel="stylesheet" href="https://gmono.github.io//css/ie8.css"><![endif]-->
+
+		
+		
+		<link rel="stylesheet" href="https://gmono.github.io/custom.css">
+		
+	</head>
+
+	<body id="top">
+		<!-- Header -->
+<header id="header">
+	
+	<a href="https://gmono.github.io/" class="image avatar"><img src="https://gmono.github.io/images/355.jpg" alt="" /></a>
+	
+	
+		<h1><strong>上清X的博客</strong></h1>
+	
+
+	
+		<nav id="sidebar">
+			<ul>
+			
+				<li><a href="https://gmono.github.io/">主页</a></li>
+			
+				<li><a href="https://gmono.github.io/tech/">技术</a></li>
+			
+				<li><a href="https://gmono.github.io/life/">生活</a></li>
+			
+				<li><a href="https://gmono.github.io/about/">关于本博客</a></li>
+			
+			</ul>
+		</nav>
+	
+</header>
+
+
+		<!-- Main -->
+		<div id="main">
+			<div>
+					
+	<span>
+		<h1>在React中构建类Winform体系</h1>
+
+		<i class="fa fa-calendar"></i>&nbsp;&nbsp;
+<time datetime="2020-01-04 21:01:01 &#43;0800 CST">4019-01-04</time>&nbsp;&nbsp;
+
+
+
+
+
+
+
+	</span>
+
+	<p>
+	    <blockquote>
+<p>上次说到了Winform体系包括大部分传统窗口体系与HTML体系的区别，HTML是由浏览器去渲染一个文档树，形成UI，其与HTML本身隔阂是很重的，HTML本质上是一个文档，有文档的基本单元做基础，节点只是数据不负责绘制，而Winform则是每个Control都是全功能且负责绘制自己，拥有关于自己的一切属性和事件（称作完备性）<br>
+而React虽然在HTML体系中构建了一个类似Winform的组件化体系，但并没有完全摆脱那种文档 UI 绘图混为一谈乱七八糟的处境，<strong>这里便对在React中构建Winform体系做初步探索</strong></p>
+</blockquote>
+<h1 id="heading">理念</h1>
+<p>首先考虑到弥合其主要差异，即让Control基类具有绘制自己的功能，于是考虑把背景-div-前景组合为一个组件<br>
+考虑到Control的绘制和子控件树是分离的，Control里面应该有两个函数：</p>
+<ol>
+<li>Content函数，返回子控件树</li>
+<li>Draw函数，负责绘制自身</li>
+</ol>
+<p>而所谓的背景前景应该是一个“绘图面”，而绘图面之前是说过是由 后Canvas-html绘图层-前Canvas组成<br>
+于是一个Control应该有7层，3层背景 中间为子树 三层前景，这个架构似乎有些过于庞大<br>
+如果让绘图面不包括HTMLcss的能力，那就只有3层，这也是一个可以考虑的选项<br>
+<strong>这里先实现后者，即简单版本</strong></p>
+<h1 id="heading-1">初步实现</h1>
+<p>首先是整体上，一个Control应该有一组对应的Control属性，对于Control基类来说它是ControlProps</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-tsx" data-lang="tsx"><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">ControlProps</span>
+{
+<span style="color:#a6e22e">height</span>:<span style="color:#66d9ef">string</span>;
+<span style="color:#a6e22e">width</span>:<span style="color:#66d9ef">string</span>;
+}
+</code></pre></div><p>然后是主体类</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-tsx" data-lang="tsx"><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">abstract</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Control</span><span style="color:#f92672">&lt;</span><span style="color:#a6e22e">P</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">ControlProps</span><span style="color:#f92672">=</span><span style="color:#a6e22e">ControlProps</span>,<span style="color:#a6e22e">S</span><span style="color:#f92672">=</span>{},<span style="color:#a6e22e">SS</span><span style="color:#f92672">=</span>{}<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">React</span>.<span style="color:#a6e22e">Component</span><span style="color:#f92672">&lt;</span><span style="color:#a6e22e">P</span>,<span style="color:#a6e22e">S</span>,<span style="color:#a6e22e">SS</span><span style="color:#f92672">&gt;</span>
+{
+    <span style="color:#66d9ef">constructor</span>(<span style="color:#a6e22e">props</span>:<span style="color:#66d9ef">P</span>){
+        <span style="color:#66d9ef">super</span>(<span style="color:#a6e22e">props</span>)
+    }
+    
+
+    <span style="color:#66d9ef">private</span> <span style="color:#a6e22e">FrontClick</span>(<span style="color:#a6e22e">e</span>:<span style="color:#66d9ef">React.MouseEvent</span>){
+        <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">evt</span><span style="color:#f92672">=</span>document.<span style="color:#a6e22e">createEvent</span>(<span style="color:#e6db74">&#34;MouseEvents&#34;</span>);
+        <span style="color:#a6e22e">evt</span>.<span style="color:#a6e22e">initEvent</span>(<span style="color:#e6db74">&#34;click&#34;</span>,<span style="color:#66d9ef">true</span>,<span style="color:#66d9ef">true</span>);
+        <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">es</span><span style="color:#f92672">=</span><span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">refs</span>[<span style="color:#e6db74">&#34;cont&#34;</span>] <span style="color:#66d9ef">as</span> <span style="color:#a6e22e">HTMLDivElement</span>;
+        <span style="color:#a6e22e">es</span>.<span style="color:#a6e22e">dispatchEvent</span>(<span style="color:#a6e22e">evt</span>);
+    }
+    <span style="color:#75715e">//实现
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">render</span>(){
+        <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">ss</span><span style="color:#f92672">=</span>{
+            <span style="color:#a6e22e">height</span><span style="color:#f92672">:</span><span style="color:#e6db74">&#34;100%&#34;</span>,
+            <span style="color:#a6e22e">width</span><span style="color:#f92672">:</span><span style="color:#e6db74">&#34;100%&#34;</span>,
+            <span style="color:#a6e22e">position</span><span style="color:#f92672">:</span><span style="color:#e6db74">&#34;absolute&#34;</span>,
+            <span style="color:#a6e22e">top</span>:<span style="color:#66d9ef">0</span>,
+            <span style="color:#a6e22e">left</span>:<span style="color:#66d9ef">0</span>
+        } <span style="color:#66d9ef">as</span> <span style="color:#a6e22e">React</span>.<span style="color:#a6e22e">CSSProperties</span>
+        <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">contss</span><span style="color:#f92672">=</span>{
+            <span style="color:#a6e22e">height</span>:<span style="color:#66d9ef">this.props.height</span>,
+            <span style="color:#a6e22e">width</span>:<span style="color:#66d9ef">this.props.width</span>,
+            <span style="color:#a6e22e">position</span><span style="color:#f92672">:</span><span style="color:#e6db74">&#34;relative&#34;</span>
+        } <span style="color:#66d9ef">as</span> <span style="color:#a6e22e">React</span>.<span style="color:#a6e22e">CSSProperties</span>;
+        <span style="color:#75715e">//自绘
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">back</span><span style="color:#f92672">&amp;&amp;</span><span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">draw</span>(<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">back</span>,<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">front</span>);
+        <span style="color:#66d9ef">return</span> (
+        <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">div</span> <span style="color:#a6e22e">style</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">contss</span>} <span style="color:#a6e22e">className</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;control&#34;</span><span style="color:#f92672">&gt;</span>
+            <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">canvas</span> <span style="color:#a6e22e">key</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;front&#34;</span> <span style="color:#a6e22e">style</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">ss</span>} <span style="color:#a6e22e">ref</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;back&#34;</span> <span style="color:#a6e22e">className</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;control-back&#34;</span><span style="color:#f92672">&gt;</span>
+
+            <span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/</span><span style="color:#960050;background-color:#1e0010">c</span><span style="color:#960050;background-color:#1e0010">a</span><span style="color:#960050;background-color:#1e0010">n</span><span style="color:#960050;background-color:#1e0010">v</span><span style="color:#960050;background-color:#1e0010">a</span><span style="color:#960050;background-color:#1e0010">s</span><span style="color:#960050;background-color:#1e0010">&gt;</span>
+        <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">div</span> <span style="color:#a6e22e">ref</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;cont&#34;</span> <span style="color:#a6e22e">style</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">ss</span>} <span style="color:#a6e22e">className</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;control-content&#34;</span><span style="color:#f92672">&gt;</span>
+            {<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">content</span>()}
+        <span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/</span><span style="color:#960050;background-color:#1e0010">d</span><span style="color:#960050;background-color:#1e0010">i</span><span style="color:#960050;background-color:#1e0010">v</span><span style="color:#960050;background-color:#1e0010">&gt;</span>
+        <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">canvas</span>  <span style="color:#a6e22e">key</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;back&#34;</span> 
+            <span style="color:#a6e22e">style</span><span style="color:#f92672">=</span>{Object.<span style="color:#a6e22e">assign</span>(({
+                <span style="color:#a6e22e">pointerEvents</span><span style="color:#f92672">:</span><span style="color:#e6db74">&#34;none&#34;</span>
+            } <span style="color:#66d9ef">as</span> <span style="color:#a6e22e">React</span>.<span style="color:#a6e22e">CSSProperties</span>),<span style="color:#a6e22e">ss</span>)} <span style="color:#a6e22e">ref</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;front&#34;</span> <span style="color:#a6e22e">className</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;control-front&#34;</span><span style="color:#f92672">&gt;</span>
+
+        <span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/</span><span style="color:#960050;background-color:#1e0010">c</span><span style="color:#960050;background-color:#1e0010">a</span><span style="color:#960050;background-color:#1e0010">n</span><span style="color:#960050;background-color:#1e0010">v</span><span style="color:#960050;background-color:#1e0010">a</span><span style="color:#960050;background-color:#1e0010">s</span><span style="color:#960050;background-color:#1e0010">&gt;</span>
+        <span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/</span><span style="color:#960050;background-color:#1e0010">d</span><span style="color:#960050;background-color:#1e0010">i</span><span style="color:#960050;background-color:#1e0010">v</span><span style="color:#960050;background-color:#1e0010">&gt;</span>
+        )
+    }
+
+    <span style="color:#66d9ef">private</span> <span style="color:#a6e22e">back</span>:<span style="color:#66d9ef">CanvasRenderingContext2D</span>;
+    <span style="color:#66d9ef">private</span> <span style="color:#a6e22e">front</span>:<span style="color:#66d9ef">CanvasRenderingContext2D</span>;
+    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">componentDidMount</span>()<span style="color:#f92672">:</span><span style="color:#66d9ef">void</span>{
+        <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">back</span><span style="color:#f92672">=</span><span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">refs</span>[<span style="color:#e6db74">&#34;back&#34;</span>] <span style="color:#66d9ef">as</span> <span style="color:#a6e22e">HTMLCanvasElement</span>;
+        <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">front</span><span style="color:#f92672">=</span><span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">refs</span>[<span style="color:#e6db74">&#34;front&#34;</span>] <span style="color:#66d9ef">as</span> <span style="color:#a6e22e">HTMLCanvasElement</span>;
+        [<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">back</span>,<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">front</span>]<span style="color:#f92672">=</span>[<span style="color:#a6e22e">back</span>,<span style="color:#a6e22e">front</span>].<span style="color:#a6e22e">map</span>(<span style="color:#a6e22e">v</span><span style="color:#f92672">=</span><span style="color:#f92672">&gt;</span><span style="color:#a6e22e">v</span>.<span style="color:#a6e22e">getContext</span>(<span style="color:#e6db74">&#34;2d&#34;</span>));
+        <span style="color:#75715e">//Controls继承时必须调用此函数 super.xxxx
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">forceUpdate</span>();
+    }
+    <span style="color:#75715e">//Control渲染函数
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">abstract</span> <span style="color:#a6e22e">draw</span>(<span style="color:#a6e22e">background</span>:<span style="color:#66d9ef">CanvasRenderingContext2D</span>,
+    <span style="color:#a6e22e">frontend</span>:<span style="color:#66d9ef">CanvasRenderingContext2D</span>);
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">abstract</span> <span style="color:#a6e22e">content</span>()<span style="color:#f92672">:</span><span style="color:#a6e22e">JSX</span>.<span style="color:#a6e22e">Element</span>;
+}
+</code></pre></div><p>上面这个类是一个基础版本，其中有些东西需要解答：</p>
+<ol>
+<li>Canvas的Style是将Canvas的尺寸拉到与父组件一致，而此处用style其实并不好，最好的方法是设置绝对大小并与父组件的client大小同步</li>
+<li>上面这个类与一般的Control有一个区别，普通的winform控件有个Controls列表，渲染时直接依据子Control的position属性渲染到对应位置（或者其他布局策略但总体为父组件决定子组件的定位），而这里直接由content函数返回子树，这是由React在生成UI时指定逻辑决定的，也即很多时候是要重新生成子控件树的，并不像普通窗口一样控件树是固定的只由程序修改</li>
+<li>React会自动处理refs，在事件处理函数中是可以直接用React和ReactDOM的函数找到和操作节点，这点无需干涉</li>
+<li>React的类继承于Component但节点实例基类为JSX.Element</li>
+</ol>
+<hr>
+<p>以下通过这个Control实现一个基础控件</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-tsx" data-lang="tsx"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">MyControl</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">Control</span><span style="color:#f92672">&lt;</span><span style="color:#a6e22e">ControlProps</span>,{<span style="color:#a6e22e">text</span>:<span style="color:#66d9ef">string</span>}<span style="color:#f92672">&gt;</span>
+{
+    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">content</span>()<span style="color:#f92672">:</span> <span style="color:#a6e22e">JSX</span>.<span style="color:#a6e22e">Element</span> {
+        <span style="color:#66d9ef">return</span> <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">div</span><span style="color:#f92672">&gt;</span>{<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">state</span>.<span style="color:#a6e22e">text</span>}<span style="color:#f92672">&lt;</span><span style="color:#a6e22e">button</span> <span style="color:#a6e22e">onClick</span><span style="color:#f92672">=</span>{()<span style="color:#f92672">=</span><span style="color:#f92672">&gt;</span>{<span style="color:#a6e22e">alert</span>(<span style="color:#e6db74">&#34;test&#34;</span>)}}<span style="color:#f92672">&gt;</span><span style="color:#960050;background-color:#1e0010">点</span><span style="color:#960050;background-color:#1e0010">我</span><span style="color:#960050;background-color:#1e0010">更</span><span style="color:#960050;background-color:#1e0010">新</span><span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/</span><span style="color:#960050;background-color:#1e0010">b</span><span style="color:#960050;background-color:#1e0010">u</span><span style="color:#960050;background-color:#1e0010">t</span><span style="color:#960050;background-color:#1e0010">t</span><span style="color:#960050;background-color:#1e0010">o</span><span style="color:#960050;background-color:#1e0010">n</span><span style="color:#960050;background-color:#1e0010">&gt;</span><span style="color:#960050;background-color:#1e0010">&lt;</span><span style="color:#960050;background-color:#1e0010">/</span><span style="color:#960050;background-color:#1e0010">d</span><span style="color:#960050;background-color:#1e0010">i</span><span style="color:#960050;background-color:#1e0010">v</span><span style="color:#960050;background-color:#1e0010">&gt;</span><span style="color:#960050;background-color:#1e0010">;</span>
+    }
+    <span style="color:#66d9ef">constructor</span>(<span style="color:#a6e22e">props</span>){
+        <span style="color:#66d9ef">super</span>(<span style="color:#a6e22e">props</span>);
+        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">state</span><span style="color:#f92672">=</span>{
+            <span style="color:#a6e22e">text</span><span style="color:#f92672">:</span><span style="color:#e6db74">&#34;hello wlrd&#34;</span>
+        }
+    }
+    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">click</span><span style="color:#f92672">=</span>(<span style="color:#a6e22e">e</span>)<span style="color:#f92672">=</span><span style="color:#f92672">&gt;</span>{
+        <span style="color:#a6e22e">alert</span>(<span style="color:#e6db74">&#34;ok&#34;</span>);
+        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">setState</span>({
+            <span style="color:#a6e22e">text</span><span style="color:#f92672">:</span><span style="color:#e6db74">&#34;my own controls&#34;</span>
+        });
+    }
+    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">draw</span>(<span style="color:#a6e22e">background</span>: <span style="color:#66d9ef">CanvasRenderingContext2D</span>, <span style="color:#a6e22e">frontend</span>: <span style="color:#66d9ef">CanvasRenderingContext2D</span>) {
+        <span style="color:#a6e22e">background</span>.<span style="color:#a6e22e">fillStyle</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;red&#34;</span>;
+        <span style="color:#a6e22e">frontend</span>.<span style="color:#a6e22e">fillStyle</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;orange&#34;</span>;
+        <span style="color:#a6e22e">background</span>.<span style="color:#a6e22e">fillRect</span>(<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">100</span>,<span style="color:#ae81ff">100</span>);
+        <span style="color:#a6e22e">frontend</span>.<span style="color:#a6e22e">fillRect</span>(<span style="color:#ae81ff">150</span>,<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">100</span>,<span style="color:#ae81ff">100</span>);
+        
+    }
+
+}
+</code></pre></div><p>效果:
+<img src="https://s2.ax1x.com/2020/01/04/l0R0Vs.png" alt="l0R0Vs.png"></p>
+<p>虽然上面按钮挡住但还是可以点，前景是设置为不接收事件的<br>
+目前考虑的改进有：</p>
+<ul>
+<li>考虑给Control加上自己的点按事件，使用绝对XY坐标</li>
+<li>考虑给Control加上绘图库</li>
+<li>实现7层Control</li>
+<li>让控件的位置和大小为其实际UI位置和大小，而与CSS脱钩</li>
+</ul>
+
+	</p>
+
+	<div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "disqus_kRt9EQbHt5" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+			</div>
+			
+		</div>
+
+		<!-- Footer -->
+<footer id="footer">
+	<ul class="icons">
+		
+		
+		
+		
+		<li><a href="//github.com/gmono35" target="_blank" class="icon fa-github"><span class="label">GitHub</span></a></li>
+		
+		
+		
+		
+		
+		
+		<li><a href="https://gmono.github.io/#contact-form" class="icon fa-envelope-o"><span class="label">Email</span></a></li>
+		
+		
+		<li><a href="https://gmono.github.io/index.xml" class="icon fa-rss" type="application/rss+xml"><span class="label">RSS</span></a></li>
+		
+	</ul>
+
+	<ul class="copyright">
+		
+		<li>© Gmono</li>
+		
+		<li>Design: None</li>
+		
+	</ul>
+</footer>
+
+<!-- Scripts -->
+<script src="https://gmono.github.io/js/jquery.min.js"></script>
+<script src="https://gmono.github.io/js/jquery.poptrox.min.js"></script>
+<script src="https://gmono.github.io/js/skel.min.js"></script>
+<script src="https://gmono.github.io/js/util.js"></script>
+
+<script src="https://gmono.github.io/js/main.js"></script>
+
+
+
+
+
+	</body>
+</html>

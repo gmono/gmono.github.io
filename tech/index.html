@@ -77,6 +77,36 @@ Free for personal and commercial use under the CCA 3.0 license (html5up.net/lice
     
         <span>
     <h1>
+        <a href="https://gmono.github.io/tech/frontend/%E5%9C%A8react%E4%B8%AD%E6%9E%84%E5%BB%BA%E7%B1%BBwinform%E4%BD%93%E7%B3%BB/">在React中构建类Winform体系</a>
+    </h1>
+
+    <i class="fa fa-calendar"></i>&nbsp;&nbsp;
+<time datetime="2020-01-04 21:01:01 &#43;0800 CST">4019-01-04</time>&nbsp;&nbsp;
+
+
+
+
+
+
+
+</span>
+
+<p>上次说到了Winform体系包括大部分传统窗口体系与HTML体系的区别，HTML是由浏览器去渲染一个文档树，形成UI，其与HTML本身隔阂是很重的，HTML本质上是一个文档，有文档的基本单元做基础，节点只是数据不负责绘制，而Winform则是每个Control都是全功能且负责绘制自己，拥有关于自己的一切属性和事件（称作完备性）
+而React虽然在HTML体系中构建了一个类似Winform的组件化体系，但并没有完全摆脱那种文档 UI 绘图混为一谈乱七八糟的处境，这里便对在React中构建Winform体系做初步探索
+ 理念 首先考虑到弥合其主要差异，即让Control基类具有绘制自己的功能，于是考虑把背景-div-前景组合为一个组件
+考虑到Control的绘制和子控件树是分离的，Control里面应该有两个函数：
+ Content函数，返回子控件树 Draw函数，负责绘制自身  而所谓的背景前景应该是一个“绘图面”，而绘图面之前是说过是由 后Canvas-html绘图层-前Canvas组成
+于是一个Control应该有7层，3层背景 中间为子树 三层前景，这个架构似乎有些过于庞大
+如果让绘图面不包括HTMLcss的能力，那就只有3层，这也是一个可以考虑的选项
+这里先实现后者，即简单版本
+初步实现 首先是整体上，一个Control应该有一组对应的Control属性，对于Control基类来说它是ControlProps
+export interface ControlProps { height:string; width:string; } 然后是主体类
+export abstract class Control&lt;P extends ControlProps=ControlProps,S={},SS={}&gt; extends React.Component&lt;P,S,SS&gt; { constructor(props:P){ super(props) } private FrontClick(e:React.MouseEvent){ let evt=document.createEvent(&#34;MouseEvents&#34;); evt.initEvent(&#34;click&#34;,true,true); let es=this.refs[&#34;cont&#34;] as HTMLDivElement; es.dispatchEvent(evt); } //实现  public render(){ const ss={ height:&#34;100%&#34;, width:&#34;100%&#34;, position:&#34;absolute&#34;, top:0, left:0 } as React.CSSProperties const contss={ height:this.props.height, width:this.</p>
+<hr>
+
+    
+        <span>
+    <h1>
         <a href="https://gmono.github.io/tech/frontend/react-component%E7%9A%84%E5%9F%BA%E6%9C%AC%E9%80%BB%E8%BE%91/">React Component的基本逻辑</a>
     </h1>
 
@@ -154,6 +184,13 @@ HTML体系的这种混合其实带来了逻辑上的不清晰，当然也有好�
 
     
 
+    
+    <script>
+        
+        document.querySelectorAll("p").forEach((v,k)=>{
+            v.innerText=v.innerText.slice(0,200)+"......";
+        })
+    </script>
 
 			</div>
 			
