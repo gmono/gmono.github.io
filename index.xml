@@ -12,6 +12,15 @@
     
     
     <item>
+      <title>测试一下这个目录</title>
+      <link>https://gmono.github.io/life/%E6%B5%8B%E8%AF%95%E8%BF%99%E4%B8%AA%E7%9B%AE%E5%BD%95/</link>
+      <pubDate>Sat, 04 Jan 2020 22:38:54 +0800</pubDate>
+      
+      <guid>https://gmono.github.io/life/%E6%B5%8B%E8%AF%95%E8%BF%99%E4%B8%AA%E7%9B%AE%E5%BD%95/</guid>
+      <description>测试一下</description>
+    </item>
+    
+    <item>
       <title>设计一个新的静态博客系统</title>
       <link>https://gmono.github.io/tech/%E8%AE%BE%E8%AE%A1%E4%B8%80%E4%B8%AA%E6%96%B0%E7%9A%84%E9%9D%99%E6%80%81%E5%8D%9A%E5%AE%A2%E7%B3%BB%E7%BB%9F/</link>
       <pubDate>Sat, 04 Jan 2020 22:38:54 +0800</pubDate>
@@ -96,6 +105,19 @@ HTML体系的这种混合其实带来了逻辑上的不清晰，当然也有好�
  如何解决 React如何拥有Winform等窗口库的优点？
  首先，就是要构建多Window的体系，让其Window可以简单地Show一下就能显示，不需要各种奇技淫巧和trick型逻辑 其次，就是增加自绘能力，把效果的绘制强制从UI的产生中分离出来，这样虽然在实现效果时会感觉有些不方便不顺手，但却实际地保证了清晰，比如在UI中给item加效果就应该弄一个独立的容器组件实现，这也有利于统一HTML APP的风格，以防大批app充满廉价感，还有利于增加性能 建立类似桌面系统的那种体系，除了多窗口外还有比如通知，message视图（桌面右上角的通知），获取其他窗口和控件的HDC（对应于其绘图画板）允许程序在各处绘制图形 把HTML纳入“绘图”的体系中，也即绘图除了Canvas外上面应该还叠一层div并再叠加一层canvas做前景，这样构建一个“绘图面”，就不会损失html和css的能力，在逻辑上也是一个完整的绘图器 构建Control基类，其提供一个绘图面，上面一层Content，再上面还有一个前景面，Control提供一个默认的控件绘图体系，与Bitmap绘图体系兼容一致 进一步地，可以让所有Control都只由Canvas为基础，或者直接建立在一个Canvas中，但这样成本太高，也可以退一步，在书写时禁止在render里添加效果代码而只能添加逻辑代码，一切效果都只能由容器实现，一个实现效果的组件就只能实现效果，不能把效果和逻辑混合起来   后记： 还有一个大问题是HTML和CSS高度依赖，HTML节点元素并不独立，简单地说，比如子元素设置height 100%无效，竟然是因为css要从父元素的css读取height属性，即使父元素高度不为0，只要没有显式设置，都认为=为0
 如此看来，HTML节点从来就没有被当作一个真正的UI节点对待过，而完全是一个文档元素，其在UI上的实际属性都是不算数的，可以说其渲染出来的结果和这节点本身根本没有关系，而JS程序去读的时候才能从浏览器那里读到真正高度，CSS只会在CSS里找，这说明其文档 UI CSS ，基本是分离的，这是很奇怪的结构，也是很复杂的结构，这种结构让UI和文档和CSS脱节，就好像HTML并个UI一样，html和css甚至无法与渲染出来的UI有任何实际交互，虽然HTML一开始也不是为APP构建的</description>
+    </item>
+    
+    <item>
+      <title>关于博客</title>
+      <link>https://gmono.github.io/about/</link>
+      <pubDate>Wed, 01 Jan 2020 17:57:40 +0800</pubDate>
+      
+      <guid>https://gmono.github.io/about/</guid>
+      <description>头一次用Hugo构建博客，速度确实快
+原因 本来是用onenote记录日记的，然后想用它记录技术日志，但不支持代码高亮和markdown，写起来很不方便
+而网上的onenote插件都是只支持桌面版的onenote，而我用的是uwp版本，虽然感觉uwp版本丝般顺滑，很适合画画记笔记，写日记之类，但用于记录复杂内容还是很不够
+后考虑到使用简书记录，但这种内容托管到一个网站说不定什么时候就倒了的感觉还是不太好，因此考虑使用static博客系统来构建托管到github，看了一下使用go语言的hugo似乎不错，hexo以前是感受到了它的慢，不可理解
+内容  首先主要是用来记录技术博客的 也有可能用来记录一些非技术方面的结论，不过重要内容我是不会公开的（大概） 顺便还可以发布一下自己的开源项目或框架库什么的 写个人网站时更有逼格  </description>
     </item>
     
   </channel>
